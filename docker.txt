@@ -1,0 +1,94 @@
+part 1
+
+1. problem statement 
+
+2. installation of docker cli and desktop :
+   🔹 1. Install Docker Desktop (GUI + CLI included)
+          Docker Desktop gives you both:
+          Docker CLI (terminal commands)
+          Docker Desktop (GUI for managing containers/images)
+
+🖥️ For Windows:
+    1.Download Docker Desktop 👉 https://www.docker.com/products/docker-desktop
+    2.Run the installer (.exe file).
+    3.During installation:
+      -> Enable WSL 2 backend (recommended).
+      -> It may ask you to install WSL2 and Linux kernel if not already installed.
+
+    4.Restart your PC after installation.
+    5.Open Docker Desktop → you’ll see a whale 🐳 icon running.
+    6.Open Command Prompt (cmd) / PowerShell and test:
+       ->docker --version
+       ->docker run hello-world
+
+
+3. understanding imaage and container :-
+   🔹Docker Image : Think of an image as a blueprint (or recipe) for creating a container.
+    It contains everything needed to run an application:
+       Code
+       Dependencies (libraries, packages)
+       Runtime (Python, Node.js, Java, etc.)
+       Configurations
+    Images are read-only. Once built, they don’t change.
+    You usually pull images from Docker Hub or build your own using a Dockerfile.
+    
+    🔹Docker Container : A container is a running instance of an image.
+                          You can think of it as an actual computer (or process) created from the blueprint (image).
+                          Containers are lightweight and isolated, meaning each container has its own:
+
+              Filesystem (from image)
+              Network
+              Processes
+         Unlike images, containers are mutable (you can run commands inside them, create/change files).
+👉 Example:
+If you run docker run -it python:3.9, you get a container where you can type Python commands.
+Multiple containers can be created from the same image.
+
+# List images on your system
+docker images
+
+# List running containers
+docker ps
+
+# List all containers (including stopped ones)
+docker ps -a
+
+# Run a container from an image
+docker run -it ubuntu bash
+
+# Stop a container
+docker stop <container_id>
+
+# Remove a container
+docker rm <container_id>
+
+
+4. Running Ubantu image in container : 
+
+5. multiple container
+6. port mapping 
+
+
+7. Environment Variables : docker run -it -p 1025:1025 -e key=value -e key=value imagename(Ubantu)
+   
+   🔹 Meaning of each part
+   docker run → Start a new container.
+    -it → Interactive terminal (so you can type commands inside).
+    -p 1025:1025 → Port mapping:
+    Host port 1025 → Container port 1025.
+    Lets outside world talk to container service.
+    -e key=value → Set environment variables inside the container.
+    
+    Example: -e USER=amit -e ENV=dev
+    ubuntu → The image name (Ubuntu in this case).
+      
+    🔹 Check environment variables inside container
+        Once inside Ubuntu container, type:
+           printenv
+          or
+           echo $USER
+           echo $MODE
+        output:
+          USER=amit
+          MODE=development
+
