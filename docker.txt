@@ -92,3 +92,59 @@ docker rm <container_id>
           USER=amit
           MODE=development
 
+PART 2: 
+
+1. Bridge (default networking)
+
+Every container gets its own private IP inside a Docker network.
+
+Containers can talk to each other using this network, and to the host through NAT.
+
+Best when you want isolation.
+
+🔹 Run with bridge (default):
+
+docker run -d --name yt-app-bridge -p 8080:3000 youtube-nodejs
+
+
+👉 Here:
+
+Container port 3000 (your app) is mapped to host port 8080.
+
+You can access it at http://localhost:8080.
+
+2. Host Networking
+
+The container shares the host’s network stack.
+
+No port mapping (-p) is needed.
+
+Fast, but no isolation.
+
+🔹 Run with host:
+
+docker run -d --name yt-app-host --network host youtube-nodejs
+
+
+👉 Here:
+
+Your app runs directly on host’s network.
+
+If your app listens on port 3000, you access it at http://localhost:3000 (no mapping).
+
+3. None Networking
+
+The container has no network at all.
+
+Useful for isolation, debugging, or batch jobs.
+
+🔹 Run with none:
+
+docker run -d --name yt-app-none --network none youtube-nodejs
+
+
+👉 Here:
+
+No internet, no host access.
+
+Only stdin/stdout works unless you manually configure networking.
